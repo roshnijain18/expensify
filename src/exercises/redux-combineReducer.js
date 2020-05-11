@@ -105,7 +105,7 @@ const initialState = {
         amount: 700000,
         createdAt: 0 
     }],
-    filers: {
+    filters: {
         text: 'rent',
         sortBy: 'amount',  //date or amount
         startDate: undefined,
