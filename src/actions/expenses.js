@@ -1,6 +1,7 @@
 //Actions:
 import * as uuid from 'uuid';
 import * as types from './types';
+import axios from 'axios';
 
 // ADD_EXPENSE
 export const addExpense = ({
@@ -8,16 +9,47 @@ export const addExpense = ({
   note = '',
   amount = 0,
   createdAt = 0
-}) => ({
-  type: types.ADD_EXPENSE,
-  expense: {
-    id: uuid.v4(),
-    description,
-    note,
-    amount,
-    createdAt,
-  }
+}) => {
+  const id = uuid.v4();
+  return dispatch => {
+    dispatch(addExpenseStarted());
+
+    axios
+      .post(`http://localhost:9000/expense`, {
+        id,
+        description,
+        note,
+        amount,
+        createdAt
+      })
+      .then(res => {
+        dispatch(addExpenseSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(addExpenseFailure(err.message));
+      });
+  };
+};
+
+const addExpenseSuccess = expense => ({
+  type: types.ADD_EXPENSE_SUCCESS,
+  expense
 });
+
+const addExpenseStarted = () => ({
+  type: types.ADD_EXPENSE_STARTED
+});
+
+const addExpenseFailure = error => ({
+  type: types.ADD_EXPENSE_FAILURE,
+  error
+});
+
+
+
+
+
+
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
   type: types.REMOVE_EXPENSE,

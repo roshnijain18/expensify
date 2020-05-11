@@ -1,9 +1,10 @@
 
-import {createStore, combineReducers } from 'redux';
+import {createStore, combineReducers, applyMiddleware } from 'redux';
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
 import moment from 'moment';
 import * as uuid from 'uuid';
+import thunk from 'redux-thunk';
 
 const initialState = {
   expenses: [{
@@ -28,6 +29,8 @@ export default () => {
       expenses: expensesReducer,
       filters: filtersReducer,
     }
-  ), initialState );
+  ),
+  initialState,
+  applyMiddleware(thunk));
   return store;
 };
