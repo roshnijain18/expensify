@@ -1,0 +1,24 @@
+.button {
+  background: $blue;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: $font-size-large;
+  font-weight: 300;
+  line-height: 1;
+  padding: $s-size;
+  text-decoration: none;
+  margin-right: 10px;
+  border: 1px solid;
+  border-color: rgba(0,0,0,.1);
+  border-radius: 5px;
+}
+
+.button-secondary {
+  background: #ff685f;
+}
+
+.button-cancel {
+  background: $off-white;
+  color: black;
+}
