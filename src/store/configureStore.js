@@ -15,7 +15,7 @@ const initialState = {
       createdAt: moment(),
   }],
   filters: {
-      text: 'rent',
+      text: '',
       sortBy: 'amount',  //date or amount
       startDate: undefined,
       endDate: undefined

@@ -55,7 +55,7 @@ class ExpenseForm extends React.Component {
       this.props.onSubmit({
           description: this.state.description,
           amount: parseFloat(this.state.amount, 10) * 100,
-          createdAt: this.state.createdAt.valueOf(),
+          createdAt: this.state.createdAt,
           note: this.state.note
       });
     }
@@ -87,7 +87,6 @@ class ExpenseForm extends React.Component {
           onFocusChange={this.onFocusChange}
           numberOfMonths={1}
           isOutsideRange={() => false}
-          className="date-picker"
         />
         <textarea
           placeholder="Add a note for your expense (optional)"

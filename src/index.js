@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const api = require('./api');
+const dbModel = require('./db');
 const bodyParser = require('body-parser');
 
 // db Connection w/ localhost
@@ -15,7 +15,6 @@ const db = require('knex')({
   }
 });
 
-
 const app = express();
 const port = process.env.PORT || "9000";
 const publicPath = path.join(__dirname, '..', 'public');
@@ -23,10 +22,10 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json()) // handle json data
 
 // App Routes - Auth
-app.get('/expenses', (req, res) => api.getExpenses(req, res, db))
-app.post('/expense', (req, res) => api.addExpense(req, res, db))
-app.put('/expense/:id', (req, res) => api.editExpense(req, res, db))
-app.delete('/expense/:id', (req, res) => api.deleteExpense(req, res, db))
+app.get('/expenses', (req, res) => dbModel.getExpenses(req, res, db))
+app.post('/expense', (req, res) => dbModel.addExpense(req, res, db))
+app.put('/expense/:id', (req, res) => dbModel.editExpense(req, res, db))
+app.delete('/expense/:id', (req, res) => dbModel.deleteExpense(req, res, db))
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
